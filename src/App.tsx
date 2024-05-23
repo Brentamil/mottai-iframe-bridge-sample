@@ -25,7 +25,7 @@ function App() {
           count is {count}
         </button> */}
         <div className="row"><span>Symbol:</span><input value={ticker} onChange={(e) => setTicker(e.target.value)} /></div>
-        <div className="row"><span>Exch:</span><input value={exchange} onChange={(e) => setExchange(e.target.value)} /></div>
+        <div className="row"><span>Exchange:</span><input value={exchange} onChange={(e) => setExchange(e.target.value)} /></div>
         <button onClick={() => {
           const fit = window[xApiAttributeName];
           if (fit) {
