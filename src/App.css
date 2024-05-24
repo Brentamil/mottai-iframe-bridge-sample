@@ -38,7 +38,7 @@ input {
 }
 
 .card {
-  padding: 4em;
+  padding: 1em 8em;
   display: flex;
   flex-direction: column;
 }
