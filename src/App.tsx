@@ -38,12 +38,6 @@ function App() {
           }
         }}>BUY</button>
         <button onClick={() => {
-          const fit = window[xApiAttributeName] as iframe<XCommand>;
-          if (fit) {
-            fit.sendCommand({ type: 'popup_neworder', params: { side: 'buy', instrument: { symbol: ticker, exchange }, quantity: 1000, price: 100.00}} as XCommand)
-          }
-        }}>BUY</button>
-        <button onClick={() => {
           const fit = window[xApiAttributeName];
           if (fit) {
             fit.sendCommand({ type: 'popup_profile', params: { instrument: { symbol: ticker, exchange }}} as XCommand)
@@ -53,7 +47,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p> */}
       </div>
-        <p>You can access this sample code at</p><a target="_blank" href="https://github.com/Brentamil/mottai-iframe-bridge-sample">brentamil.github.io/mottai-iframe-bridge-sample</a>
+        <p>You can access this sample code at</p><a target="_blank" href="https://github.com/Brentamil/mottai-iframe-bridge-sample">github.com</a>
       {/* <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p> */}
