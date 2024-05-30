@@ -52,3 +52,7 @@ input {
 .read-the-docs {
   color: #888;
 }
+
+.error {
+  color: #f00;
+}

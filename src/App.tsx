@@ -10,6 +10,8 @@ function App() {
   // const [count, setCount] = useState(0)
   const [ticker, setTicker] = useState('BHP')
   const [exchange, setExchange] = useState('ASX')
+  const [position, setPosition] = useState<null | { RISK_PO_SignedQty: number, RISK_PO_OpenAvgPx: number }[]>(null)
+  const [error, setError] = useState<null | string>(null)
 
   return (
     <>
@@ -36,13 +38,35 @@ function App() {
           if (fit) {
             fit.sendCommand({ type: 'popup_neworder', params: { side: 'buy', instrument: { symbol: ticker, exchange }, quantity: 1000, price: 100.00}} as XCommand)
           }
-        }}>BUY</button>
+        }}>Popup Buy Ticket</button>
         <button onClick={() => {
           const fit = window[xApiAttributeName];
           if (fit) {
-            fit.sendCommand({ type: 'popup_profile', params: { instrument: { symbol: ticker, exchange }}} as XCommand)
+            fit.sendCommand({ type: 'popup_chart', params: { instrument: { symbol: ticker, exchange }}} as XCommand)
           }
-        }}>Profile</button>
+        }}>Popup Chart</button>
+        <button onClick={() => {
+          const fit = window[xApiAttributeName];
+          if (fit) {
+            setError(null);
+            fit.sendCommandWithResult(
+              { /*id: 'position', subscribe: true,*/ type: 'position', params: { instrument: { symbol: ticker, exchange }}} as XCommand,
+              true,
+              (result) => {
+                if (result.type === 'error') {
+                  setError(result.data.message);
+                } else {
+                  setPosition(result.data);
+                }
+              },
+              'position',
+            )
+          }
+        }}>Subscribe to Position</button>
+        <div className="row"><span>Position:</span><span>{position?.length ? `${position[0].RISK_PO_SignedQty} @${position[0].RISK_PO_OpenAvgPx}` : 'N/A'}</span></div>
+        {
+          error && <div className="error">{error}</div>
+        }
         {/* <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p> */}
