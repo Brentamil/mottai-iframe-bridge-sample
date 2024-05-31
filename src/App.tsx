@@ -36,6 +36,12 @@ function App() {
         <button onClick={() => {
           const fit = window[xApiAttributeName] as iframe<XCommand>;
           if (fit) {
+            fit.sendCommand({ type: 'change_instrument', params: { instrument: { symbol: ticker, exchange }}} as XCommand)
+          }
+        }}>Change Instrument</button>
+        <button onClick={() => {
+          const fit = window[xApiAttributeName] as iframe<XCommand>;
+          if (fit) {
             fit.sendCommand({ type: 'popup_neworder', params: { side: 'buy', instrument: { symbol: ticker, exchange }, quantity: 1000, price: 100.00}} as XCommand)
           }
         }}>Popup Buy Ticket</button>
